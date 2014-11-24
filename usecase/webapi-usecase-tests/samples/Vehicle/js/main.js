@@ -15,6 +15,7 @@ limitations under the License.
 
 Authors:
         Liu, Xin <xinx.liu@intel.com>
+        Chen,Yanbo <yanbox.a.chen@intel.com>
 
 */
 
@@ -29,17 +30,13 @@ function getVehicle() {
     jQuery("#zones").text("vehicleSpeed zones: " + tizen.vehicle.vehicleSpeed.zones);
 
     // Verify Availability, check speed is availabled for get():
-    var speedFlag = vehicle.vehicleSpeed.availableForRetrieval("speed") === "available";
-    
-    if(speedFlag) {
       // Verify get:
-      tizen.vehicle.vehicleSpeed.get().then(function(vehicleSpeed) {
-        jQuery("#speed").text("vehicleSpeed speed: " + vehicleSpeed.speed);
-      },
-      function(error) {
-        window.alert("Error callback: " + error.message);
-      });
-    }
+    tizen.vehicle.vehicleSpeed.get().then(function(vehicleSpeed) {
+      jQuery("#speed").text("vehicleSpeed speed: " + vehicleSpeed.speed);
+    },
+    function(error) {
+      window.alert("Error callback: " + error.message);
+    });
     
     // Verify subscribe and unsubscribe:
     var vehicleSpeedSub = tizen.vehicle.vehicleSpeed.subscribe(function(vehicleSpeed) {
@@ -47,13 +44,10 @@ function getVehicle() {
       tizen.vehicle.vehicleSpeed.unsubscribe(vehicleSpeedSub);
     });
 
-    if(vehicle.vehicleSpeed.isLogged)
-    {
-      // Verify getHistory:
-      tizen.vehicle.vehicleSpeed.getHistory(tizen.vehicle.vehicleSpeed.from, tizen.vehicle.vehicleSpeed.to).then(function(data) {
-        jQuery("#historyData").text("history data: " + data.length);
-      });
-    }
+    // Verify getHistory:
+    tizen.vehicle.vehicleSpeed.getHistory(tizen.vehicle.vehicleSpeed.from, tizen.vehicle.vehicleSpeed.to).then(function(data) {
+      jQuery("#historyData").text("history data: " + data.length);
+    });
 
   } catch (err) {
     window.alert("Thrown an error: " + err.message);
