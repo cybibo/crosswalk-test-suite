@@ -26,6 +26,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Authors:
         Xie,Yunxiao <yunxiaox.xie@intel.com>
+        Xu, Kang <kangx.xu@intel.com>
 
 */
 
@@ -66,8 +67,9 @@ $("#start").live("tap", function () {
     clearTimeout(showId);
     showId = setTimeout("show()", 10000);
     $("#infobox").text("Starting......");
-    window.speechUtter = new SpeechSynthesisUtterance();
-    speechUtter.text = content;
+    window.speechUtter = new tizen.SpeechSynthesisUtterance(content);
+    //speechUtter.text = content;
+    speechUtter.lang = "en-US";
     speechUtter.rate = 1.2;
     speechUtter.onstart = function (evt) {
         clearTimeout(showId);
@@ -82,13 +84,14 @@ $("#start").live("tap", function () {
     }
     speechUtter.onerror = function(err) {
         clearTimeout(showId);
-        $("#infobox").text("There was an error that prevented successful speaking of this utterance. \n" + $("#infobox").text());
+        $("#infobox").text("Error: " + err.message + "\n" + $("#infobox").text());
         $("#start").closest(".ui-btn").show();
         $("#cancel").closest(".ui-btn").hide();
         $("#resume").closest(".ui-btn").hide();
         $("#pause").button("disable");
     };
-    speechSynthesis.speak(speechUtter);
+    window.speechSyn = tizen.speechSynthesis;
+    speechSyn.speak(speechUtter);
     status();
 });
 
@@ -98,7 +101,7 @@ $("#cancel").live("tap", function () {
     $("#cancel").closest(".ui-btn").hide();
     $("#resume").closest(".ui-btn").hide();
     $("#pause").button("disable");
-    speechUtter.cancel();
+    speechSyn.cancel();
     $("#infobox").text("SpeechSynthesis cancel.\n" + $("#infobox").text());
     status();
 });
@@ -107,7 +110,7 @@ $("#pause").live("tap", function () {
     testFlag.blue = true;
     $("#resume").closest(".ui-btn").show();
     $("#pause").closest(".ui-btn").hide();
-    speechUtter.pause();
+    speechSyn.pause();
     $("#infobox").text("SpeechSynthesis pause.\n" + $("#infobox").text());
     status();
 });
@@ -116,7 +119,7 @@ $("#resume").live("tap", function () {
     testFlag.blue = true;
     $("#pause").closest(".ui-btn").show();
     $("#resume").closest(".ui-btn").hide();
-    speechUtter.resume();
+    speechSyn.resume();
     $("#infobox").text("SpeechSynthesis resume.\n" + $("#infobox").text());
     status();
 });

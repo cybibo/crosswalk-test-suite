@@ -42,9 +42,9 @@ pkgid=`pkgcmd -l | grep "update_original_LowerMulti_tests" | awk '{print $4}'`
 pkgid=`echo $pkgid | awk '{print $1}'`
 pkgid=${pkgid:1:-1}
 get_uninstall=`pkgcmd -u -n  $pkgid -q`
-install_origin_xpk  ./testapp/update_original_versionOne_tests.xpk update_original_versionOne_tests
+install_origin_xpk  $xpk_path/update_original_versionOne_tests.xpk update_original_versionOne_tests
 
 #update valid xpk and check DB
-update_negative_xpk ./testapp/update_versionOne_LowerMulti_tests.xpk 2 pdate_versionOne_LowerMulti_test
+update_negative_xpk $xpk_path/update_versionOne_LowerMulti_tests.xpk 2 pdate_versionOne_LowerMulti_test
 
 exit 0

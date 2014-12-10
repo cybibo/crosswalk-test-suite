@@ -3,7 +3,7 @@
     <set name="Multimedia &amp;amp; Graphics">
       <testcase component="Crosswalk Use Cases/WebAPI" execution_type="manual" id="Jsenhance" purpose="Jsenhance">
       </testcase>
-      <testcase component="usecase" execution_type="manual" id="PictureElement" purpose="PictureElement">
+      <testcase component="Crosswalk Use Cases/WebAPI" execution_type="manual" id="PictureElement" purpose="PictureElement">
       </testcase>
     </set>
     <set name="Networking &amp;amp; Storage">
@@ -12,6 +12,10 @@
       <testcase component="Crosswalk Use Cases/WebAPI" execution_type="manual" id="RawSockets" purpose="Raw Sockets">
       </testcase>
       <testcase component="Crosswalk Use Cases/WebAPI" execution_type="manual" id="WebSocket" purpose="WebSocket">
+      </testcase>
+      <testcase component="Crosswalk Use Cases/WebAPI" execution_type="manual" id="SpeechSynthesis" purpose="SpeechSynthesis">
+      </testcase>
+      <testcase component="Crosswalk Use Cases/WebAPI" execution_type="manual" id="WebSpeech" purpose="WebSpeech">
       </testcase>
     </set>
     <set name="Security">
